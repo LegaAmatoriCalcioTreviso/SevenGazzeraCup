@@ -363,6 +363,9 @@ async function salvaRisultato(){
 
   await db.collection("partite").doc(id).update({giocata:true,gC,gO});
 
+  // 🔥 AGGIUNTA CONDIZIONE
+if (partita.fase !== "eliminazione") {
+
   const casa=squadre.find(s=>s.nome===partita.casa);
   const ospite=squadre.find(s=>s.nome===partita.ospite);
 
@@ -375,6 +378,7 @@ async function salvaRisultato(){
 
   await db.collection("squadre").doc(casa.nome).set(casa);
   await db.collection("squadre").doc(ospite.nome).set(ospite);
+}
 
   // MARCATORI
   for(const m of marcatoriInput.value.split(";")){
