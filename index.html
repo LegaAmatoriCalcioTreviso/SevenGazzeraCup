@@ -137,14 +137,17 @@
 </div>
 
 <table>
-  <thead>
-    <tr>
-  <th>Data</th>
-  <th>Ora</th>
-  <th>Casa</th>
-  <th>Ospite</th>
-</tr>
-  </thead>
+
+<thead>
+  <tr>
+    <th>Data</th>
+    <th>Ora</th>
+    <th>Casa</th>
+    <th>Risultato</th>
+    <th>Ospite</th>
+  </tr>
+</thead>
+
   <tbody id="calendario"></tbody>
 </table>
 
@@ -326,15 +329,20 @@ function renderCalendario(){
 
     const classe = p.giocata ? "played" : "not-played";
 
-    tbody.innerHTML += `
-      <tr class="${classe}">
-        <td>${p.data || "-"}</td>
-        <td>${p.ora || "-"}</td>
-        <td>${teamHTML(p.casa)}</td>
-        <td>${teamHTML(p.ospite)}</td>
-      </tr>
-    `;
-  });
+const risultato = p.giocata
+  ? `${p.gC ?? 0} - ${p.gO ?? 0}`
+  : "-";
+
+tbody.innerHTML += `
+  <tr class="${classe}">
+    <td>${p.data || "-"}</td>
+    <td>${p.ora || "-"}</td>
+    <td>${teamHTML(p.casa)}</td>
+    <td><strong>${risultato}</strong></td>
+    <td>${teamHTML(p.ospite)}</td>
+  </tr>
+`;
+});
 }
 
 // ADMIN FIX
